@@ -8,10 +8,10 @@ const app = express();
 app.use(express.json());
 
 
-// const courseRoutes = require('./routes/courseRoutes');
+const courseRoutes = require('./routes/courseRoutes');
 
 
-// app.use('/api/courses', courseRoutes);
+app.use('/api/courses', courseRoutes);
 
 app.get('/', (req, res) => {
     res.send('LMS API is running...');
