@@ -1,3 +1,6 @@
+// models/Resource.js
+// Schéma Mongoose représentant une ressource pédagogique dans un module.
+
 const mongoose = require('mongoose');
 
 const resourceSchema = new mongoose.Schema({
@@ -8,26 +11,30 @@ const resourceSchema = new mongoose.Schema({
     },
     type: {
         type: String,
-        enum: ['VIDEO', 'DOCUMENT', 'LINK', 'CODE', 'QUIZ'], 
-        required: [true, 'Le type de ressource est obligatoire']
+        enum: ['VIDEO', 'DOCUMENT', 'LINK', 'CODE', 'QUIZ'],
+        required: [true, 'Le type de ressource est obligatoire (VIDEO, DOCUMENT, LINK, CODE, QUIZ)']
     },
     storageUrl: {
         type: String,
-        required: [true, 'L\'URL ou le chemin du fichier est requis']
+        required: [true, 'L\'URL ou le chemin de la ressource est requis'],
+        trim: true
     },
     description: {
-        type: String
+        type: String,
+        trim: true
     },
     displayOrder: {
         type: Number,
         default: 1
     },
-  
+    // Clé étrangère / Relation : Référence vers le module parent
     moduleId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Module',
-        required: [true, 'La ressource doit être rattachée à un module']
+        required: [true, 'La ressource doit obligatoirement être rattachée à un module']
     }
-}, { timestamps: true });
+}, {
+    timestamps: true
+});
 
 module.exports = mongoose.model('Resource', resourceSchema);
