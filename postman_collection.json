@@ -1,0 +1,193 @@
+{
+  "info": {
+    "name": "LMS Backend API - Catalogue",
+    "description": "Collection Postman pour tester toutes les routes du catalogue LMS (Sprint 1)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Courses (Cours)",
+      "item": [
+        {
+          "name": "1. Obtenir tous les cours publiés (avec pagination)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/courses?page=1&limit=10",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "courses"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "2. Filtrer par Catégorie et Niveau",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/courses?category=Frontend&level=Débutant",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "courses"],
+              "query": [
+                { "key": "category", "value": "Frontend" },
+                { "key": "level", "value": "Débutant" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "3. Rechercher un cours par mot-clé",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/courses?search=JavaScript",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "courses"],
+              "query": [
+                { "key": "search", "value": "JavaScript" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "4. Obtenir les détails d'un cours par ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/courses/{{courseId}}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "courses", "{{courseId}}"]
+            }
+          }
+        },
+        {
+          "name": "5. Obtenir un cours complet (avec Modules & Ressources)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/courses/{{courseId}}/full",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "courses", "{{courseId}}", "full"]
+            }
+          }
+        },
+        {
+          "name": "6. Créer un cours (Formateur simulé)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"React.js Moderne & Redux Toolkit\",\n  \"description\": \"Apprenez React 19 et la gestion d'état moderne.\",\n  \"category\": \"Frontend\",\n  \"level\": \"Intermédiaire\",\n  \"estimatedDuration\": 20,\n  \"publicationStatus\": \"publié\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/courses",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "courses"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Modules",
+      "item": [
+        {
+          "name": "1. Obtenir les modules d'un cours",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/courses/{{courseId}}/modules",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "courses", "{{courseId}}", "modules"]
+            }
+          }
+        },
+        {
+          "name": "2. Créer un module pour un cours",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Les composants et les hooks\",\n  \"description\": \"Découverte de useState et useEffect\",\n  \"displayOrder\": 1,\n  \"estimatedDuration\": 90,\n  \"courseId\": \"{{courseId}}\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/modules",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "modules"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Resources (Ressources)",
+      "item": [
+        {
+          "name": "1. Obtenir les ressources d'un module",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/modules/{{moduleId}}/resources",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "modules", "{{moduleId}}", "resources"]
+            }
+          }
+        },
+        {
+          "name": "2. Créer une ressource",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Vidéo : Les bases des Hooks\",\n  \"type\": \"VIDEO\",\n  \"storageUrl\": \"https://youtube.com/watch?v=sample-hooks\",\n  \"description\": \"Tutoriel vidéo explicatif\",\n  \"displayOrder\": 1,\n  \"moduleId\": \"{{moduleId}}\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/resources",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "resources"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
