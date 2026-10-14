@@ -13,7 +13,7 @@ const errorHandler = require('./middlewares/errorHandler');
 const courseRoutes = require('./routes/courseRoutes');
 const moduleRoutes = require('./routes/moduleRoutes');
 const resourceRoutes = require('./routes/resourceRoutes');
-
+const authroutes = require('./routes/authRoutes') ;
 // 1. Chargement des variables d'environnement (.env)
 dotenv.config();
 
@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
 app.use('/api/courses', courseRoutes);
 app.use('/api/modules', moduleRoutes);
 app.use('/api/resources', resourceRoutes);
-
+app.use('/api/auth' , authroutes) ;
 // 6. Middlewares de gestion des erreurs
 app.use(notFound);      // Gère les routes inexistantes (404)
 app.use(errorHandler);  // Gère les erreurs serveur et validation (500, 400, etc.)
@@ -55,3 +55,6 @@ app.listen(PORT, () => {
     console.log(` Serveur démarré sur le port ${PORT} en mode ${process.env.NODE_ENV || 'development'}`);
     console.log(` URL de base : http://localhost:${PORT}`);
 });
+
+
+

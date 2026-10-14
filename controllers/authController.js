@@ -1,4 +1,4 @@
-const user = require('../models/user');
+const user = require('../models/User');
 
 exports.register = async (req , res , next ) => {
 
@@ -19,7 +19,7 @@ exports.register = async (req , res , next ) => {
             });
         }
 
-          const newUser = await User.create({
+          const newUser = await user.create({
             name,
             email,
             password,
