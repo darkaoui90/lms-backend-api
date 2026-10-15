@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 exports.register = async (req, res, next) => {
+     console.log("LOGIN CONTROLLER HIT");
   try {
     const { name, email, password } = req.body;
     
